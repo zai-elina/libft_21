@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bneucar <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 14:44:27 by bneucar           #+#    #+#             */
-/*   Updated: 2021/10/14 12:33:51 by bneucar          ###   ########.fr       */
+/*   Created: 2021/10/14 15:00:32 by bneucar           #+#    #+#             */
+/*   Updated: 2021/10/14 15:13:36 by bneucar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	unsigned char	*ptr;
 	unsigned char	*ptr1;
 
-	ptr = (unsigned char *)dest;
-	ptr1 = (unsigned char *)src;
-	if (ptr < ptr1)
-		while (len--)
-			*(ptr++) = *(ptr1++);
-	else
+	ptr = (unsigned char *)s1;
+	ptr1 = (unsigned char *)s2;
+	while (n--)
 	{
-		ptr += len - 1;
-		ptr1 += len - 1;
-		while (len--)
-			*(ptr--) = *(ptr1--);
+		if (*ptr != *ptr1)
+			return (*ptr - *ptr1);
+		ptr++;
+		ptr1++;
 	}
-	return (dest);
+	return (0);
 }
