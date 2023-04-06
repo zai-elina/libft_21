@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <limits.h>
 
-
-char    on_iter(unsigned int n, int iter)
+char    digits_to_str(int n, int i)
 {
-    char *s = "0123456789";
-    while (iter--)
+    char *s;
+
+    s = "0123456789";
+    while (i--)
         n /= 10;
-    return s[n % 10];
+    return (s[n % 10]);
 }
 
 int num_len(int n)
@@ -29,24 +30,25 @@ int num_len(int n)
 char    *ft_itoa(int n)
 {
     char    *res;
-    int     is_neg;
-    unsigned int help_n;
-    int     iter;
+    int     minus;
+    int     i;
 
-    is_neg = n < 0;
-    res = (char *)malloc(num_len(n) + is_neg + 1);
-    if (is_neg)
-        help_n = (n + 1) * -1 + 1;
-    else
-        help_n = n;
-    if (is_neg)
+    minus = 0;
+    if (n < 0)
+        minus = 1;
+    res = (char *)malloc(num_len(n) + minus + 1);
+    if (n == -2147483648)
+        return("-2147483648");
+    if (minus)
+        n = -n;
+    if (minus)
         res[0] = '-';
-    iter = is_neg;
-    while (iter < (num_len(n) + is_neg))
+    i = minus;
+    while (i < (num_len(n) + minus))
     {
-        res[iter] = on_iter(help_n, num_len(n) + is_neg - iter - 1);
-        iter++;
+        res[i] = digits_to_str(n, num_len(n) + minus - i - 1);
+        i++;
     }
-    res[iter] = '\0';
-    return res;
+    res[i] = '\0';
+    return (res);
 }
